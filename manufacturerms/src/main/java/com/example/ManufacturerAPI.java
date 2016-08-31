@@ -19,6 +19,9 @@ import com.example.repository.ManufaturerRepository;
 public class ManufacturerAPI {
 
 	@Autowired
+	private OrderClient orderClient;
+	
+	@Autowired
 	private ManufaturerRepository manufaturerRepository;
 
 	@RequestMapping(value = "/api/manufacturer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -42,5 +45,10 @@ public class ManufacturerAPI {
 			manufaturerRepository.save(manufacturerOne);
 		}
 		return new ResponseEntity<Manufacturer>(manufacturer, HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/")
+	public List<Order> findAllByOrders() {
+		return orderClient.findAll();
 	}
 }
