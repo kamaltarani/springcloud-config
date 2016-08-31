@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,9 @@ public class OrderAPI {
 
 	@RequestMapping(value = "/api/order", method = RequestMethod.GET)
 	public ResponseEntity<List<Order>> findAll() {
-		return new ResponseEntity<List<Order>>(manufaturerRepository.findAll(), HttpStatus.OK);
+		List<Order> list = new ArrayList<>();
+		list.add(new Order(1, "Local Order", new Date(), true));
+		return new ResponseEntity<List<Order>>(list, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/api/order/{id}", method = RequestMethod.PUT)
