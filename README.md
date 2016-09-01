@@ -1,0 +1,2 @@
+# springcloud-config
+This project includes multiple projects implemented in the training session of SOA based architecture. The topic includes Spring Service Discovery and Registration using Consul, Client side Load Balancer using RIBBON, Declarative Rest client using FEIGN client, Circuit Breaker using HYSTRIX, API Gateway using ZUUL, Spring Cloud Bus using RabbitMQ and Cloud Security using OAuth2, JWT and OpenId connect. There are multiple commits in the same project, so please go through all commits history to know what feature has been implemented.
