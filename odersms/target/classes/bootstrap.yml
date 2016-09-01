@@ -13,6 +13,13 @@ spring:
     consul:
       discovery:
         instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+        health-check-interval: 10m
+      
+      # To Stop continuous polling by Consul
+      config:
+        watch:
+          enabled: false
+        
         
 server:
   port: ${PORT:${SERVER_PORT:0}}

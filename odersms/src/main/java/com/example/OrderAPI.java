@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +20,14 @@ import com.example.model.Order;
 import com.example.repository.OrderRepository;
 
 @RestController
+@ConfigurationProperties(prefix="newConfig")
+@RefreshScope()
 public class OrderAPI {
 
 	@Autowired
 	private OrderRepository manufaturerRepository;
+	
+	private String data;
 
 	@RequestMapping(value = "/api/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Order> add(@RequestBody Order manufacturer) {
@@ -32,7 +38,7 @@ public class OrderAPI {
 	@RequestMapping(value = "/api/order", method = RequestMethod.GET)
 	public ResponseEntity<List<Order>> findAll() {
 		List<Order> list = new ArrayList<>();
-		list.add(new Order(1, "Local Order", new Date(), true));
+		list.add(new Order(1, data, new Date(), true));
 		return new ResponseEntity<List<Order>>(list, HttpStatus.OK);
 	}
 
@@ -46,5 +52,13 @@ public class OrderAPI {
 			manufaturerRepository.save(manufacturerOne);
 		}
 		return new ResponseEntity<Order>(manufacturer, HttpStatus.ACCEPTED);
+	}
+	
+	public String getData() {
+		return data;
+	}
+	
+	public void setData(String data) {
+		this.data = data;
 	}
 }
